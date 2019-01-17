@@ -25,10 +25,35 @@ function shuffle(array) {
     return array;
 }
 
-const classname = document.getElementsByClassName("card");
+
+let symbols = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o', 'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-cube', 'fa-cube', 'fa-leaf', 'fa-leaf', 'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb']
 var firstPass = true;
 var firstItem = "";
 var secondItem = "";
+
+function run() {
+  /* Shuffle the symbols */
+  shuffle(symbols);
+  console.log("After shuffle: " + symbols);
+
+  /* Select all the tiles inside the UL Deck */
+  deckTiles = document.querySelector('.deck');
+  allItems = deckTiles.querySelectorAll('i');
+
+  /* Add the new shuffled classes to the List Items */
+  for (let i = 0; i < symbols.length; i++) {
+    allItems[i].removeAttribute("class");
+    allItems[i].classList.add('fa');
+    allItems[i].classList.add(symbols[i]);
+    console.log(allItems[i]);
+  }
+
+};
+console.log("After Program: " + symbols);
+
+run();
+
+/*
 
 const clickOccurred = function() {
       this.classList.add("open");
@@ -80,6 +105,7 @@ const clickOccurred = function() {
 for (var i = 0; i < classname.length; i++) {
     classname[i].addEventListener('click', clickOccurred, false);
 }
+*/
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

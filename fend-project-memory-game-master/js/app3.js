@@ -16,19 +16,11 @@
 
 let symbols = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o', 'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-cube', 'fa-cube', 'fa-leaf', 'fa-leaf', 'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb']
 var firstPass = true;
-var cardStore = [];
+var firstItem = "";
 var secondItem = "";
 let recycleCards = document.querySelector('.restart');
 var allCards = document.querySelectorAll('.card');
 var allOpen = 0;
-var match = 0;
-var moves = 0;
-var firstOpenCard = '';
-var allMatches = [];
-var itemOne = '';
-var itemTwo = '';
-var countDisplay = document.querySelector('span');
-var stars = '';
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -44,7 +36,7 @@ function shuffle(array) {
     return array;
 };
 
-/* Recreate the unordered list of cards, initialize all variables */
+/* Recreate the unordered list of cards */
 function buildTheDeck() {
   deckTiles = document.querySelector('.deck');
   allItems = deckTiles.querySelectorAll('i');
@@ -53,12 +45,6 @@ function buildTheDeck() {
     allItems[i].removeAttribute("class");
     allItems[i].classList.add('fa');
     allItems[i].classList.add(symbols[i]);
-    allItems[i].parentNode.classList.remove('open','show', 'match');
-    cardStore = [];
-    itemOne = '';
-    itemTWo = '';
-    moves = 0;
-    countDisplay.innerText = 0;
   }
 };
 
@@ -82,63 +68,20 @@ function checkCards(){
 };
 
 function checkForFirstClick() {
+  /*allCards[i].addEventListener('click', function () {*/
   console.log('A deck tile was clicked!');
   firstItem = this.querySelector("i");
-
-  /* Ensure the user is clicking on an unopened and unmatched card */
-  if ((firstItem.parentNode.classList.contains('open')) || (firstItem.parentNode.classList.contains('match'))){
-    return;
+  this.classList.add('open', 'show');
+  console.log(firstItem);
+  console.log(i);
+};
+/*
+  if (firstItem.length > 1) {
+    if (secondItem === )
   }
 
-  /*proeed with verifying the cards */
-  cardStore.push(this.querySelector("i"));
-  if (cardStore.length > 1) {
-    itemOne = cardStore[0].classList;
-    itemTwo = cardStore[1].classList;
-  };
-
-
-  this.classList.add('open', 'show');
-
-  setTimeout (function(){
-    /* Check the length of the card array to ensure two clicks have occured */
-    if (cardStore.length > 1) {
-
-      /* Increment the move counter and display it's most current value */
-      moves++;
-      countDisplay.innerText = moves;
-
-      /* Compare the classes for a match */
-      if (itemOne[1] == itemTwo[1]) {
-          console.log('This is a Match');
-          /* Set the card classes if match */
-          cardStore[0].parentNode.classList.add('match');
-          cardStore[1].parentNode.classList.add('match');
-          cardStore[0].parentNode.classList.remove('open','show');
-          cardStore[1].parentNode.classList.remove('open','show');
-          cardStore = [];
-          itemOne = '';
-          itemTwo = '';
-          match++;
-          console.log("Match Counter:"  + match)
-          if (match > 7) {
-            console.log("Game Over, You Win");
-          }
-        } else {
-          console.log('This is not a Match')
-          cardStore[0].parentNode.classList.remove('open','show');
-          cardStore[1].parentNode.classList.remove('open','show');
-          cardStore = [];
-          itemOne = '';
-          itemTwo = '';
-        }
-
-      }
-    }, 500);
-    if (moves == 2) {
-      document.getElementsByClassName("stars").removeChild[0];
-    };
 };
+*/
 
 function run() {
 
